@@ -4,7 +4,7 @@ import requests
 
 from data.handlers import Urls, Handlers
 from data.user_data import User
-
+from helpers.helpers import create_data_user
 
 @allure.suite('Создание пользователя')
 class TestCreateUser:
@@ -12,7 +12,7 @@ class TestCreateUser:
     @allure.description('Создание уникального пользователя')
     @allure.title('Создание уникального пользователя')
     def test_create_new_user_success(self):
-        response = requests.post(f'{Urls.MAIN_URL}{Handlers.CREATE_USER}', data=User.create_data_user())
+        response = requests.post(f'{Urls.MAIN_URL}{Handlers.CREATE_USER}', data=create_data_user())
         assert response.status_code == 200 and response.json()["success"] is True
 
     @allure.description('При создании дублирующего пользователя возвращается предупреждение')
